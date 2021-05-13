@@ -14,6 +14,10 @@ namespace Cubic_World
 {
     public class Game : GameWindow
     {
+        public Game(int width, int height, string title) : base(width, height, GraphicsMode.Default, title) 
+        {
+            
+        }
 
         private void Initialize()
         {

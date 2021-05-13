@@ -14,9 +14,12 @@ namespace Cubic_World
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
+            using (Game game = new Game(800, 600, "Cubic World"))
+            {
+                //Run takes a double, which is how many frames per second it should strive to reach.
+                //You can leave that out and it'll just update as fast as the hardware will allow it.
+                game.Run(60.0);
+            }
         }
     }
 }
