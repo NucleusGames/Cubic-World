@@ -16,7 +16,8 @@ namespace Cubic_World
     {
         public Game(int width, int height, string title) : base(width, height, GraphicsMode.Default, title) 
         {
-            
+            //Test
+
         }
 
         protected override void OnUpdateFrame(FrameEventArgs e)
