@@ -19,9 +19,9 @@ namespace Cubic_World
             
         }
 
-        private void Initialize()
+        protected override void OnUpdateFrame(FrameEventArgs e)
         {
-
+            base.OnUpdateFrame(e);
         }
     }
 }
