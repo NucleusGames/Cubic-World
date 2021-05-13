@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenTK;
 using OpenTK.Graphics;
+using OpenTK.Input;
 
 namespace Cubic_World
 {
@@ -21,6 +22,13 @@ namespace Cubic_World
 
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
+            KeyboardState input = Keyboard.GetState();
+
+            if (input.IsKeyDown(Key.Escape))
+            {
+                Exit();
+            }
+
             base.OnUpdateFrame(e);
         }
     }
