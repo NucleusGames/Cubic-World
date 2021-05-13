@@ -7,15 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SharpGL.Shaders;
+using OpenTK;
+using OpenTK.Graphics;
 
 namespace Cubic_World
 {
-    public partial class frmMain : Form
+    public class Game : GameWindow
     {
-        public frmMain()
+
+        private void Initialize()
         {
-            InitializeComponent();
-        } //Test123
+
+        }
     }
 }
