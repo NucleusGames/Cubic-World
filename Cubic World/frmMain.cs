@@ -21,18 +21,12 @@ namespace Cubic_World
         int VertexArrayObject;
         public Game(int width, int height, string title) : base(width, height, GraphicsMode.Default, title) 
         {
-            //Test
+            
 
         }
 
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
-            float[] vertices = {
-                -0.5f, -0.5f, 0.0f, //Bottom-left vertex
-                 0.5f, -0.5f, 0.0f, //Bottom-right vertex
-                 0.0f,  0.5f, 0.0f  //Top vertex
-            };
-
             VertexArrayObject = GL.GenVertexArray();
 
             // ..:: Initialization code (done once (unless your object frequently changes)) :: ..
