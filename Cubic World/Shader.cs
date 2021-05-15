@@ -10,7 +10,7 @@ namespace Cubic_World
 {
     class Shader
     {
-        int Handle;
+        public int Handle;
         int VertexShader;
         int FragmentShader;
 
