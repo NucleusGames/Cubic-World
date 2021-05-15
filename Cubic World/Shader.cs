@@ -11,29 +11,29 @@ namespace Cubic_World
     class Shader
     {
         int Handle;
+        int VertexShader;
+        int FragmentShader;
+
+        string VertexShaderSource;
+        string FragmentShaderSource;
 
         private bool disposedValue = false;
-
         public Shader(string vertexPath, string fragmentPath)
         {
-            string VertexShaderSource;
-
             using (StreamReader reader = new StreamReader(vertexPath, Encoding.UTF8))
             {
                 VertexShaderSource = reader.ReadToEnd();
             }
-
-            string FragmentShaderSource;
 
             using (StreamReader reader = new StreamReader(fragmentPath, Encoding.UTF8))
             {
                 FragmentShaderSource = reader.ReadToEnd();
             }
 
-            int VertexShader = GL.CreateShader(ShaderType.VertexShader);
+            VertexShader = GL.CreateShader(ShaderType.VertexShader);
             GL.ShaderSource(VertexShader, VertexShaderSource);
 
-            int FragmentShader = GL.CreateShader(ShaderType.FragmentShader);
+            FragmentShader = GL.CreateShader(ShaderType.FragmentShader);
             GL.ShaderSource(FragmentShader, FragmentShaderSource);
 
             GL.CompileShader(VertexShader);
@@ -55,11 +55,6 @@ namespace Cubic_World
             GL.AttachShader(Handle, FragmentShader);
 
             GL.LinkProgram(Handle);
-
-            GL.DetachShader(Handle, VertexShader);
-            GL.DetachShader(Handle, FragmentShader);
-            GL.DeleteShader(FragmentShader);
-            GL.DeleteShader(VertexShader);
         }
 
         public void Use()
@@ -81,7 +76,6 @@ namespace Cubic_World
         {
             GL.DeleteProgram(Handle);
         }
-
 
         public void Dispose()
         {

@@ -84,9 +84,9 @@ namespace Cubic_World
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
             //Code goes here.
-            GL.UseProgram();
+            //GL.UseProgram();
             GL.BindVertexArray(VertexArrayObject);
-            someOpenGLFunctionThatDrawsOurTriangle();
+            //someOpenGLFunctionThatDrawsOurTriangle();
 
             shader.Use();
             GL.BindVertexArray(VertexArrayObject);
