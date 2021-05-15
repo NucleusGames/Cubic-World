@@ -17,8 +17,12 @@ namespace Cubic_World
     public class Game : GameWindow
     {
         Shader shader;
+        Block b = new Block();
 
         int VertexArrayObject;
+        int VertexBufferObject;
+
+        
         public Game(int width, int height, string title) : base(width, height, GraphicsMode.Default, title) 
         {
             
@@ -29,19 +33,21 @@ namespace Cubic_World
         {
             VertexArrayObject = GL.GenVertexArray();
 
+            
+
+            
+
             // ..:: Initialization code (done once (unless your object frequently changes)) :: ..
             // 1. bind Vertex Array Object
             GL.BindVertexArray(VertexArrayObject);
             // 2. copy our vertices array in a buffer for OpenGL to use
             //GL.BindBuffer(BufferTarget.ArrayBuffer, VertexBufferObject);
-            GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * sizeof(float), vertices, BufferUsageHint.StaticDraw);
+            
             // 3. then set our vertex attributes pointers
             GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
             GL.EnableVertexAttribArray(0);
 
-            GL.UseProgram();
-            GL.BindVertexArray(VertexArrayObject);
-            someOpenGLFunctionThatDrawsOurTriangle();
+            
 
             shader.Use();
             GL.BindVertexArray(VertexArrayObject);
@@ -61,6 +67,12 @@ namespace Cubic_World
         {
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
+            float[] vertices = b.block_vertices();
+
+            VertexBufferObject = GL.GenBuffer();
+            GL.BindBuffer(BufferTarget.ArrayBuffer, VertexBufferObject);
+            GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * sizeof(float), vertices, BufferUsageHint.StaticDraw);
+
             //Code goes here
             shader = new Shader("shader.vert", "shader.frag");
 
@@ -72,6 +84,13 @@ namespace Cubic_World
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
             //Code goes here.
+            GL.UseProgram();
+            GL.BindVertexArray(VertexArrayObject);
+            someOpenGLFunctionThatDrawsOurTriangle();
+
+            shader.Use();
+            GL.BindVertexArray(VertexArrayObject);
+            GL.DrawArrays(PrimitiveType.Triangles, 0, 3);
 
             Context.SwapBuffers();
             base.OnRenderFrame(e);
@@ -86,10 +105,7 @@ namespace Cubic_World
         protected override void OnUnload(EventArgs e)
         {
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
-            //GL.DeleteBuffer(VertexBufferObject);
-
-            shader.Dispose();
-
+            GL.DeleteBuffer(VertexBufferObject);
             base.OnUnload(e);
         }
     }
