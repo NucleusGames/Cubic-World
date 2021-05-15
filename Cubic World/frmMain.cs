@@ -41,8 +41,9 @@ namespace Cubic_World
         private Shader _shader;
 
         // Now, we start initializing OpenGL.
-        protected void OnLoad()
+        protected override void OnLoad(EventArgs e)
         {
+            _vertices = b.block_vertices();
             // This will be the color of the background after we clear it, in normalized colors.
             // Normalized colors are mapped on a range of 0.0 to 1.0, with 0.0 representing black, and 1.0 representing
             // the largest possible value for that channel.
@@ -119,7 +120,7 @@ namespace Cubic_World
 
             // Setup is now complete! Now we move to the OnRenderFrame function to finally draw the triangle.
 
-            base.OnLoad();
+            base.OnLoad(e);
         }
 
         // Now that initialization is done, let's create our render loop.
@@ -174,17 +175,17 @@ namespace Cubic_World
             base.OnUpdateFrame(e);
         }
 
-        protected override void OnResize(ResizeEventArgs e)
+        protected override void OnResize(EventArgs e)
         {
             // When the window gets resized, we have to call GL.Viewport to resize OpenGL's viewport to match the new size.
             // If we don't, the NDC will no longer be correct.
-            GL.Viewport(0, 0, 1280, 720);
             base.OnResize(e);
+            GL.Viewport(0, 0, 1280, 720);            
         }
 
         // Now, for cleanup. This isn't technically necessary since C# and OpenGL will clean up all resources automatically when
         // the program closes, but it's very important to know how anyway.
-        protected void OnUnload()
+        protected override void OnUnload(EventArgs e)
         {
             // Unbind all the resources by binding the targets to 0/null.
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
@@ -196,7 +197,7 @@ namespace Cubic_World
             GL.DeleteVertexArray(_vertexArrayObject);
 
             GL.DeleteProgram(_shader.Handle);
-            base.OnUnload();
+            base.OnUnload(e);
         }
     }
 }
